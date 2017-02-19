@@ -65,6 +65,8 @@ class CompaniesController extends Controller
     {
         $model = new Companies();
 
+
+
         if ($model->load(Yii::$app->request->post())) {
              $model->company_created_date = date('Y-m-d h:m:s');
              $model->save();
