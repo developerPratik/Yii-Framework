@@ -33,6 +33,7 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
+
 assets/*
 !assets/.gitignore
 protected/runtime/*
