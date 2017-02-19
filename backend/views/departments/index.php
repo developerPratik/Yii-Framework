@@ -18,18 +18,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Departments', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'department_id',
-            'branches_branch_id',
+            'companiesCompany.company_name',
+            'branchesBranch.branch_name',
             'department_name',
-            'companies_company_id',
             'department_created_date',
-            // 'department_status',
+            'department_status',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
