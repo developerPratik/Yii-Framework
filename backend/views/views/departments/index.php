@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\BranchesSearch */
+/* @var $searchModel backend\models\DepartmentsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Branches';
+$this->title = 'Departments';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="branches-index">
+<div class="departments-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Branches', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Departments', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,12 +24,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-//            'branch_id',
-            'companiesCompany.company_name',
-            'branch_name',
-            'branch_address',
-            'branch_created_date',
-            'branch_status',
+            'department_id',
+            'branches_branch_id',
+            'department_name',
+            'companies_company_id',
+            'department_created_date',
+            // 'department_status',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -12,11 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'branch_id')->textInput() ?>
+    <?= $form->field($model, 'companies_company_id')->textInput() ?>
 
     <?= $form->field($model, 'branch_name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'branch_address')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'branch_created_date')->textInput(['readonly' => true, 'value' => date('Y-m-d h:m:s')]) ?>
 
     <?= $form->field($model, 'branch_status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => '']) ?>
 

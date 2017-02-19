@@ -13,6 +13,9 @@ use Yii;
  * @property string $company_address
  * @property string $company_created_date
  * @property string $company_status
+ *
+ * @property Branches[] $branches
+ * @property Departments[] $departments
  */
 class Companies extends \yii\db\ActiveRecord
 {
@@ -30,8 +33,7 @@ class Companies extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_id', 'company_name', 'company_email', 'company_address', 'company_created_date', 'company_status'], 'required'],
-            [['company_id'], 'integer'],
+            [['company_name', 'company_email', 'company_address', 'company_created_date', 'company_status'], 'required'],
             [['company_created_date'], 'safe'],
             [['company_status'], 'string'],
             [['company_name', 'company_email', 'company_address'], 'string', 'max' => 100],
@@ -51,5 +53,30 @@ class Companies extends \yii\db\ActiveRecord
             'company_created_date' => 'Company Created Date',
             'company_status' => 'Company Status',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBranches()
+    {
+        return $this->hasMany(Branches::className(), ['companies_company_id' => 'company_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDepartments()
+    {
+        return $this->hasMany(Departments::className(), ['companies_company_id' => 'company_id']);
+    }
+
+    /**
+     * @inheritdoc
+     * @return CompaniesQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new CompaniesQuery(get_called_class());
     }
 }

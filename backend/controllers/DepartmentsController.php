@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Branches;
-use backend\models\BranchesSearch;
+use backend\models\Departments;
+use backend\models\DepartmentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BranchesController implements the CRUD actions for Branches model.
+ * DepartmentsController implements the CRUD actions for Departments model.
  */
-class BranchesController extends Controller
+class DepartmentsController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class BranchesController extends Controller
     }
 
     /**
-     * Lists all Branches models.
+     * Lists all Departments models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new BranchesSearch();
+        $searchModel = new DepartmentsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class BranchesController extends Controller
     }
 
     /**
-     * Displays a single Branches model.
+     * Displays a single Departments model.
      * @param integer $id
      * @return mixed
      */
@@ -57,16 +57,16 @@ class BranchesController extends Controller
     }
 
     /**
-     * Creates a new Branches model.
+     * Creates a new Departments model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Branches();
+        $model = new Departments();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->branch_id]);
+            return $this->redirect(['view', 'id' => $model->department_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -75,7 +75,7 @@ class BranchesController extends Controller
     }
 
     /**
-     * Updates an existing Branches model.
+     * Updates an existing Departments model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -85,7 +85,7 @@ class BranchesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->branch_id]);
+            return $this->redirect(['view', 'id' => $model->department_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -94,7 +94,7 @@ class BranchesController extends Controller
     }
 
     /**
-     * Deletes an existing Branches model.
+     * Deletes an existing Departments model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class BranchesController extends Controller
     }
 
     /**
-     * Finds the Branches model based on its primary key value.
+     * Finds the Departments model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Branches the loaded model
+     * @return Departments the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Branches::findOne($id)) !== null) {
+        if (($model = Departments::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Branches;
+use backend\models\Departments;
 
 /**
- * BranchesSearch represents the model behind the search form about `backend\models\Branches`.
+ * DepartmentsSearch represents the model behind the search form about `backend\models\Departments`.
  */
-class BranchesSearch extends Branches
+class DepartmentsSearch extends Departments
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class BranchesSearch extends Branches
     public function rules()
     {
         return [
-            [['branch_id', 'companies_company_id', 'branch_created_date'], 'integer'],
-            [['branch_name', 'branch_address', 'branch_status'], 'safe'],
+            [['department_id', 'branches_branch_id', 'companies_company_id'], 'integer'],
+            [['department_name', 'department_created_date', 'department_status'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class BranchesSearch extends Branches
      */
     public function search($params)
     {
-        $query = Branches::find();
+        $query = Departments::find();
 
         // add conditions that should always apply here
 
@@ -59,14 +59,14 @@ class BranchesSearch extends Branches
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'branch_id' => $this->branch_id,
+            'department_id' => $this->department_id,
+            'branches_branch_id' => $this->branches_branch_id,
             'companies_company_id' => $this->companies_company_id,
-            'branch_created_date' => $this->branch_created_date,
+            'department_created_date' => $this->department_created_date,
         ]);
 
-        $query->andFilterWhere(['like', 'branch_name', $this->branch_name])
-            ->andFilterWhere(['like', 'branch_address', $this->branch_address])
-            ->andFilterWhere(['like', 'branch_status', $this->branch_status]);
+        $query->andFilterWhere(['like', 'department_name', $this->department_name])
+            ->andFilterWhere(['like', 'department_status', $this->department_status]);
 
         return $dataProvider;
     }
