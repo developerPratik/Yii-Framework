@@ -35,7 +35,7 @@ class Branches extends ActiveRecord
     {
         return [
             [['companies_company_id', 'branch_name', 'branch_address', 'branch_created_date', 'branch_status'], 'required'],
-            ['companies_company_id', 'integer'],
+            ['companies_company_id', 'safe'],
             ['branch_created_date', 'safe'],
             [['branch_status'], 'string'],
             [['branch_name', 'branch_address'], 'string', 'max' => 100],
