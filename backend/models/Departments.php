@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "departments".
@@ -17,7 +18,7 @@ use Yii;
  * @property Branches $branchesBranch
  * @property Companies $companiesCompany
  */
-class Departments extends \yii\db\ActiveRecord
+class Departments extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -33,9 +34,10 @@ class Departments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['department_id', 'branches_branch_id', 'department_name', 'companies_company_id', 'department_created_date', 'department_status'], 'required'],
-            [['department_id', 'branches_branch_id', 'companies_company_id'], 'integer'],
-            [['department_created_date'], 'safe'],
+            [['branches_branch_id', 'department_name', 'companies_company_id', 'department_created_date', 'department_status'], 'required'],
+            [['companies_company_id'], 'safe'],
+            [['branches_branch_id'], 'safe'],
+            [['branch_created_date'], 'safe'],
             [['department_status'], 'string'],
             [['department_name'], 'string', 'max' => 100],
             [['branches_branch_id'], 'exist', 'skipOnError' => true, 'targetClass' => Branches::className(), 'targetAttribute' => ['branches_branch_id' => 'branch_id']],

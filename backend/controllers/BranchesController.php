@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\Companies;
 use Yii;
 use backend\models\Branches;
 use backend\models\BranchesSearch;
@@ -79,6 +80,34 @@ class BranchesController extends Controller
             Yii::$app->getSession()->setFlash('error', 'You don\'t have the required privileges');
             return $this->redirect(['branches/index']);
         }
+
+    }
+
+    public function actionList($id){
+
+        $getBranches = Branches::find()
+                        ->where(['companies_company_id' => $id])
+                        ->all();
+        if($getBranches != null) {
+            foreach($getBranches as $branch){
+                echo "<option value=".$branch->branch_id.">".$branch->branch_name."</option>";
+
+            }
+        }
+        else{
+            echo null;
+        }
+//
+//        if($getBranches != null){
+//            foreach($getBranches as $branch){
+//                echo "<option value=".$branch->."'>".$branch->branch_name."</option>";
+//
+//            }
+//        }
+//
+//        else{
+//            echo "<option>Hello</option>";
+//        }
 
     }
 

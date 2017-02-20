@@ -14,20 +14,9 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'companiesCompany')->widget(kartik\select2\Select2::className(),[
-        'data' => ArrayHelper::map(\backend\models\Companies::find()->all(),'company_id','company_name'),
-        'language' => 'en',
-        'options' => ['placeholder' => 'Select Company'],
-        'pluginOptions'=>['allowClear' => true]
-    ]) ?>
+    <?= $form->field($model, 'companies_company_id')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'branchesBranch')->widget(
-        kartik\select2\Select2::className(),[
-            'data' => ArrayHelper::map(\backend\models\Branches::find()->all(), 'branch_id','branch_name'),
-            'options' => ['placeholder' => 'Select Branch'],
-            'pluginOptions' => ['allowClear' => true]
-        ])
-        ?>
+    <?= $form->field($model, 'branches_branch_id')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'department_name')->textInput(['maxlength' => true]) ?>
 
