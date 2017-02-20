@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use \dosamigos\datepicker\DatePicker;
 use yii\helpers\ArrayHelper;
+use backend\module\settings\models\Companies;
 
 /* @var $this yii\web\View */
 /* @var $model backend\module\settings\models\Departments */
@@ -14,9 +15,18 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'companies_company_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'companies_company_id')->dropDownList(
+        ArrayHelper::map(Companies::find()->all(),'company_id','company_name'),
+        [   'prompt' => 'Select Company',
+            'onchange' =>
+                '$.post("index.php?r=settings/branches/list&id='.'"+$(this).val(),
+            function(data){
+                $( "select#departments-branches_branch_id").html(data);
+            });'
+        ]);
+    ?>
 
-    <?= $form->field($model, 'branches_branch_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'branches_branch_id')->dropDownList([], ['prompt']) ?>
 
     <?= $form->field($model, 'department_name')->textInput(['maxlength' => true]) ?>
 

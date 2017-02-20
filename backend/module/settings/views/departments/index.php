@@ -7,13 +7,16 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\module\settings\models\DepartmentsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Departments';
+$this->title = 'Departments Settings Module';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="departments-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php
+
+     // echo $this->render('_search', ['model' => $searchModel]);
+    ?>
 
     <p>
         <?= Html::a('Create Departments', ['create'], ['class' => 'btn btn-success']) ?>
@@ -24,11 +27,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'department_id',
-            'branches_branch_id',
             'department_name',
-            'companies_company_id',
+
+            [
+                'attribute' => 'companies_company_id',
+                'value' => 'companiesCompany.company_name'
+            ],
+
+            [
+                'attribute' => 'branches_branch_id',
+                'value' => 'branchesBranch.branch_name'
+            ],
+
             'department_created_date',
+            'department_status',
+
+           
             // 'department_status',
 
             ['class' => 'yii\grid\ActionColumn'],

@@ -57,10 +57,9 @@ class DepartmentsSearch extends Departments
             return $dataProvider;
         }
 
-        $query->joinWith(['companiesCompany','branchesBranch'], true, 'INNER JOIN');
+        $query->joinWith(['companiesCompany','branchesBranch'], true);
 
-
-
+//        $query->joinWith('companiesCompany', true, "INNER JOIN");
         // grid filtering conditions
         $query->andFilterWhere([
             'department_id' => $this->department_id,
@@ -70,9 +69,7 @@ class DepartmentsSearch extends Departments
         $query->andFilterWhere(['like', 'department_name', $this->department_name])
             ->andFilterWhere(['like', 'department_status', $this->department_status])
             ->andFilterWhere(['like', 'companies.company_name', $this->companies_company_id])
-            ->andFilterWhere(['like', 'branches.branches_name', $this->branches_branch_id]);
-
-
+            ->andFilterWhere(['like', 'branches.branch_name' , $this->branches_branch_id]);
         return $dataProvider;
     }
 }

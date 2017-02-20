@@ -65,13 +65,21 @@ class BranchesController extends Controller
     {
         $model = new Branches();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->branch_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if(Yii::$app->getUser()->can('create-branch')){
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->branch_id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         }
+        else{
+            Yii::$app->getSession()->setFlash('error', 'You don\'t have the required privileges');
+            return $this->redirect(['/settings/branches']);
+        }
+
+
     }
 
     /**
@@ -91,6 +99,29 @@ class BranchesController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionList($id)
+    {
+
+
+        $branches = Branches::find()
+                        ->where(['companies_company_id' => $id])
+                        ->all();
+
+        if($branches != null){
+            foreach($branches as $branch)
+            {
+                echo "<option value=".$branch->branch_id.">".$branch->branch_name."</option>";
+            }
+
+        }
+        else{
+            echo null;
+        }
+
+
+
     }
 
     /**

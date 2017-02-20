@@ -20,13 +20,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+
             'company_name',
             'company_email:email',
             'company_address',
-            'company_start_date',
             'company_created_date',
             'company_status',
-
+            [
+                'attribute' => 'company_logo',
+                'format' => 'html',
+                'label' => 'Company Logo',
+                'value' => function ($data)
+                {
+                    return Html::img($data['company_logo'],
+                        ['width' => '50px']);
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
