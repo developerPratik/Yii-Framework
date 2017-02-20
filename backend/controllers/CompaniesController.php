@@ -7,6 +7,7 @@ use Yii;
 use backend\models\Companies;
 use backend\models\CompaniesSearch;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
@@ -68,22 +69,31 @@ class CompaniesController extends Controller
         $model = new Companies();
 
 
-        if ($model->load(Yii::$app->request->post())) {
-            //Upload file in Yii
-            $model->file = UploadedFile::getInstance($model, 'file');
-            $model->file->saveAs('uploads/'.$model->company_name.$model->file->extension);
+        if (Yii::$app->user->can('create-company')) {
+            if ($model->load(Yii::$app->request->post())) {
+                //Upload file in Yii
+                $model->file = UploadedFile::getInstance($model, 'file');
+                $model->file->saveAs('uploads/' . $model->company_name . $model->file->extension);
 
-            //Save the file path to database
+                //Save the file path to database
 
-            $model->company_logo = 'uploads/'.$model->company_name.$model->file->extension;
-            $model->company_created_date = date('Y-m-d h:m:s');
-            $model->save();
-             return $this->redirect(['view', 'id' => $model->company_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+                $model->company_logo = 'uploads/' . $model->company_name . $model->file->extension;
+                $model->company_created_date = date('Y-m-d h:m:s');
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->company_id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         }
+        else
+        {
+            Yii::$app->getSession()->setFlash('error', 'You don\'t have the required privileges');
+            return $this->redirect(['companies/index']);
+        }
+
+
     }
 
     /**
