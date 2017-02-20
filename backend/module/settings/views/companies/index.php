@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Companies';
+$this->title = 'Companies Settings Module';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="companies-index">
@@ -21,7 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'company_id',
             'company_name',
             'company_email:email',
             'company_address',

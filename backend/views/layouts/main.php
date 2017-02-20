@@ -36,6 +36,28 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
+        [
+            'label' => 'Companies',
+            'items' => [
+                ['label' => 'View' ,'url' => ['/companies/index']],
+                ['label' => 'Settings' ,'url' => ['/settings/companies']],
+            ]
+        ],
+        [
+            'label' => 'Branches',
+            'items' => [
+                ['label' => 'View' ,'url' => ['/branches/index']],
+                ['label' => 'Settings' ,'url' => ['/settings/branches']],
+            ]
+        ],
+        [
+            'label' => 'Departments',
+            'items' => [
+                ['label' => 'View' ,'url' => ['/departments/index']],
+                ['label' => 'Settings' ,'url' => ['/settings/departments']],
+            ]
+        ]
+
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];

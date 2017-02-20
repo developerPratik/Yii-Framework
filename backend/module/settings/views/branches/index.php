@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\module\settings\models\BranchesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Branches';
+$this->title = 'Branches Settings Module';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="branches-index">
