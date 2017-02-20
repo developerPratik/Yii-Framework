@@ -40,9 +40,8 @@ use \backend\module\settings\models\Companies;
             'autoClose' => true,
             'format' => 'yyyy-mm-dd'
         ]
-
-
-        ]);?>
+    ]);
+    ?>
 
     <?= $form->field($model, 'branch_status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => '']) ?>
 

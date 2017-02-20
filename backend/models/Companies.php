@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use \yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "companies".
@@ -13,11 +14,12 @@ use Yii;
  * @property string $company_address
  * @property string $company_created_date
  * @property string $company_status
+ * @property string $company_logo
  *
  * @property Branches[] $branches
  * @property Departments[] $departments
  */
-class Companies extends \yii\db\ActiveRecord
+class Companies extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -27,6 +29,8 @@ class Companies extends \yii\db\ActiveRecord
         return 'companies';
     }
 
+    public $file;
+
     /**
      * @inheritdoc
      */
@@ -35,7 +39,8 @@ class Companies extends \yii\db\ActiveRecord
         return [
             [['company_name', 'company_email', 'company_address', 'company_created_date', 'company_status'], 'required'],
             [['company_created_date'], 'safe'],
-            [['company_status'], 'string'],
+            [['file'], 'file', 'skipOnEmpty' => false],
+            [['company_status', 'company_logo'], 'string'],
             [['company_name', 'company_email', 'company_address'], 'string', 'max' => 100],
         ];
     }
@@ -50,6 +55,7 @@ class Companies extends \yii\db\ActiveRecord
             'company_name' => 'Company Name',
             'company_email' => 'Company Email',
             'company_address' => 'Company Address',
+            'file' => 'Company Logo',
             'company_created_date' => 'Company Created Date',
             'company_status' => 'Company Status',
         ];

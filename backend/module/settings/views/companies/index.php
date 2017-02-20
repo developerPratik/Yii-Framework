@@ -20,13 +20,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'company_name',
             'company_email:email',
             'company_address',
             'company_start_date',
             'company_created_date',
-            // 'company_status',
+            'company_status',
+
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

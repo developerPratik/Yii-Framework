@@ -18,7 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Companies', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+    <?php Pjax::begin(); ?>
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -28,8 +29,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'company_address',
             'company_created_date',
             'company_status',
+            [
+                'attribute' => 'company_logo',
+                'format' => 'html',
+                'label' => 'Company Logo',
+                'value' => function ($data)
+                {
+                    return Html::img($data['company_logo'],
+                        ['width' => '50px']);
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-<?php Pjax::end(); ?></div>
+    <?php Pjax::end(); ?>
+</div>
