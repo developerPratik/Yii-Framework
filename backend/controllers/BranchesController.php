@@ -70,7 +70,7 @@ class BranchesController extends Controller
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->branch_id]);
             } else {
-                return $this->render('create', [
+                return $this->renderAjax('create', [
                     'model' => $model,
                 ]);
             }
@@ -97,17 +97,6 @@ class BranchesController extends Controller
         else{
             echo null;
         }
-//
-//        if($getBranches != null){
-//            foreach($getBranches as $branch){
-//                echo "<option value=".$branch->."'>".$branch->branch_name."</option>";
-//
-//            }
-//        }
-//
-//        else{
-//            echo "<option>Hello</option>";
-//        }
 
     }
 
@@ -124,7 +113,7 @@ class BranchesController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->branch_id]);
         } else {
-            return $this->render('update', [
+            return $this->renderAjax('update', [
                 'model' => $model,
             ]);
         }

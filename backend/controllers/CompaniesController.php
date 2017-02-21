@@ -82,7 +82,7 @@ class CompaniesController extends Controller
                 $model->save();
                 return $this->redirect(['view', 'id' => $model->company_id]);
             } else {
-                return $this->render('create', [
+                return $this->renderAjax('create', [
                     'model' => $model,
                 ]);
             }

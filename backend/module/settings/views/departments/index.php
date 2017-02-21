@@ -24,6 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function($model){
+            if($model->department_status == 'inactive'){
+                return ['class' => 'danger'];
+
+            }
+            else if($model->department_status == 'active'){
+                return ['class' => 'success'];
+
+            }
+            return null;
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

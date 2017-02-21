@@ -3,6 +3,10 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use yii\bootstrap;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\CompaniesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -16,12 +20,41 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Companies', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::button('Create Companies',
+            [
+                'class' => 'btn btn-success',
+                'id' => 'modalButton',
+                'value' => Url::to('index.php?r=companies/create'),
+            ])
+        ?>
     </p>
+    <?php Modal::begin(
+        [   'header' => '<h4>Company</h4>',
+            'id' => 'modal',
+            'size' => 'modal-lg'
+        ]
+    );
+
+    echo "<div id='modalContent'>Modal Content here</div>";
+
+    Modal::end();
+    ?>
     <?php Pjax::begin(); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function($model){
+            if($model->company_status == 'inactive'){
+                return ['class' => 'danger'];
+
+            }
+            else if($model->company_status == 'active'){
+                return ['class' => 'success'];
+
+            }
+            return null;
+        },
+
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'company_name',

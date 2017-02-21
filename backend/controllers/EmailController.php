@@ -73,7 +73,7 @@ class EmailController extends Controller
             if($model->attachment) {
                 $time = time();
                 $model->attachment->saveAs('uploads/' . $time . '.' . $model->attachment->extension);
-                $model->attachment = 'uploads/' . $time . ',' . $model->attachment->extension;
+                $model->attachment = 'uploads/' . $time . '.' . $model->attachment->extension;
             }
 
             if($model -> attachment){
@@ -82,7 +82,7 @@ class EmailController extends Controller
                         ->setTo($model->receiver_email)
                         ->setSubject($model->subject)
                         ->setHtmlBody($model->content)
-                        ->attach('uploads/' . time() . ',' . $model->attachment->extension)
+                        ->attach($model->attachment)
                         ->send();
 
             }
@@ -99,7 +99,7 @@ class EmailController extends Controller
             $model->save();
             return $this->redirect(['view', 'id' => $model->email_id]);
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }
