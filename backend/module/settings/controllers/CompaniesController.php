@@ -4,6 +4,7 @@ namespace backend\module\settings\controllers;
 
 use Yii;
 use backend\module\settings\models\Companies;
+use backend\module\settings\models\CompaniesSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -35,14 +36,34 @@ class CompaniesController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Companies::find(),
-        ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+        $searchModel = new CompaniesSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index',
+            [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+
+           ]
+        );
+
+
     }
+
+//        $searchModel = new CompaniesSearch();
+//        $dataProvider = $searchModel->search(Yii::$app->getRequest()->queryParams);
+////        $dataProvider = new ActiveDataProvider([
+////
+////            'query' => Companies::find(),
+////        ]);
+//
+//        return $this->render('index',
+//            [
+//            'dataProvider' => $dataProvider,
+//            'searchModel' => $searchModel
+//        ]);
+
 
     /**
      * Displays a single Companies model.

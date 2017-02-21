@@ -5,7 +5,6 @@ namespace backend\module\settings\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\module\settings\models\Companies;
 
 /**
  * CompaniesSearch represents the model behind the search form about `backend\module\settings\models\Companies`.
@@ -58,10 +57,10 @@ class CompaniesSearch extends Companies
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
+        $query->andFilterWhere
+        ([
             'company_id' => $this->company_id,
             'company_created_date' => $this->company_created_date,
-            'company_start_date' => $this->company_start_date,
         ]);
 
         $query->andFilterWhere(['like', 'company_name', $this->company_name])

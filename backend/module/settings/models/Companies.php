@@ -72,4 +72,9 @@ class Companies extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Departments::className(), ['companies_company_id' => 'company_id']);
     }
+
+
+
+
+
 }
