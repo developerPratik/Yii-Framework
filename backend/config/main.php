@@ -55,7 +55,10 @@ return [
             'class' => 'yii\swiftmailer\Mailer',
             'useFileTransport' => false,
         ],
+        'MyComponent' => [
+            'class' => 'backend\components\MyComponent',
 
+        ],
         'urlManager' => [
             'enablePrettyUrl' => false,
             'showScriptName' => false,
