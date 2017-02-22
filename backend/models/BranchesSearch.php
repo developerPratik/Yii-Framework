@@ -12,6 +12,7 @@ use backend\models\Branches;
  */
 class BranchesSearch extends Branches
 {
+    public $globalSearch;
     /**
      * @inheritdoc
      */
@@ -19,7 +20,7 @@ class BranchesSearch extends Branches
     {
         return [
             [['branch_id', 'branch_created_date'], 'integer'],
-            [['branch_name', 'companies_company_id','branch_address', 'branch_status'], 'safe'],
+            [['branch_name', 'globalSearch', 'companies_company_id','branch_address', 'branch_status'], 'safe'],
         ];
     }
 
@@ -65,10 +66,10 @@ class BranchesSearch extends Branches
             'branch_created_date' => $this->branch_created_date,
         ]);
 
-        $query->andFilterWhere(['like', 'branch_name', $this->branch_name])
-            ->andFilterWhere(['like', 'branch_address', $this->branch_address])
-            ->andFilterWhere(['like', 'branch_status', $this->branch_status])
-            ->andFilterWhere(['like', 'companies.company_name', $this->companies_company_id]);
+        $query->orFilterWhere(['like', 'branch_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'branch_address', $this->globalSearch])
+            ->orFilterWhere(['like', 'branch_status', $this->globalSearch])
+            ->orFilterWhere(['like', 'companies.company_name', $this->globalSearch]);
 
         return $dataProvider;
     }

@@ -12,6 +12,9 @@ use backend\models\Departments;
  */
 class DepartmentsSearch extends Departments
 {
+
+    public $globalSearch;
+
     /**
      * @inheritdoc
      */
@@ -19,7 +22,7 @@ class DepartmentsSearch extends Departments
     {
         return [
             [['department_id'], 'integer'],
-            [['department_name', 'branches_branch_id', 'companies_company_id','department_created_date', 'department_status'], 'safe'],
+            [['department_name','globalSearch', 'branches_branch_id', 'companies_company_id','department_created_date', 'department_status'], 'safe'],
         ];
     }
 
@@ -66,10 +69,10 @@ class DepartmentsSearch extends Departments
             'department_created_date' => $this->department_created_date,
         ]);
 
-        $query->andFilterWhere(['like', 'department_name', $this->department_name])
-            ->andFilterWhere(['like', 'department_status', $this->department_status])
-            ->andFilterWhere(['like', 'companies.company_name', $this->companies_company_id])
-            ->andFilterWhere(['like', 'branches.branch_name' , $this->branches_branch_id]);
+        $query->orFilterWhere(['like', 'department_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'department_status', $this->globalSearch])
+            ->orFilterWhere(['like', 'companies.company_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'branches.branch_name' , $this->globalSearch]);
         return $dataProvider;
     }
 }
