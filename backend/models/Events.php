@@ -29,7 +29,7 @@ class Events extends \yii\db\ActiveRecord
     {
         return [
             [['event_title', 'event_description', 'event_created_date'], 'required'],
-            [['event_created_date'], 'safe'],
+            [['event_created_date', 'event_create_time', 'event_end_time'], 'safe'],
             [['event_title', 'event_description'], 'string', 'max' => 255],
         ];
     }

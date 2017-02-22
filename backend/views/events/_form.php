@@ -17,14 +17,13 @@ use dosamigos\datepicker\DatePicker;
 
     <?= $form->field($model, 'event_description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'event_created_date')->widget(DatePicker::className(),
-        [
-            'inline' => false,
-            'clientOptions' => [
-                'autoClose' => true,
-                'format' => 'yyyy-m-d'
-            ]
-        ])
+    <?= $form->field($model, 'event_created_date')->widget(\kartik\datetime\DateTimePicker::className(),
+        ['options' => ['placeholder' => 'Enter meeting date and time'],
+        'pluginOptions' => [
+            'autoClose' => true
+        ]
+    ]);
+
     ?>
 
     <div class="form-group">

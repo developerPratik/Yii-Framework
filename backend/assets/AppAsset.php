@@ -15,7 +15,8 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
-        'js/bootstrapModal.js'
+        'js/bootstrapModal.js',
+        'js/fullCalendar.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
