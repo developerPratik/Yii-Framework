@@ -63,6 +63,9 @@ return [
             'class' => 'backend\components\MyComponent',
 
         ],
+
+
+
         'urlManager' => [
             'enablePrettyUrl' => false,
             'showScriptName' => false,
@@ -71,5 +74,9 @@ return [
         ],
 
     ],
+    'as beforeRequest' =>
+        [
+            'class' => 'backend\components\IsLoggedIn'
+        ],
     'params' => $params,
 ];
