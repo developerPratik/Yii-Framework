@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
 use yii\bootstrap;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
@@ -34,15 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'size' => 'modal-lg'
         ]
     );
-
     echo "<div id='modalContent'>Modal Content here</div>";
-
     Modal::end();
     ?>
-    <?php Pjax::begin(); ?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+//        'pjax' => true,
+//        'export' => false,
         'rowOptions' => function($model){
             if($model->company_status == 'inactive'){
                 return ['class' => 'danger'];
@@ -76,5 +75,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-    <?php Pjax::end(); ?>
+
 </div>

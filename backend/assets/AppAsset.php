@@ -9,15 +9,19 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
+    public $basePath = '@web';
     public $baseUrl = '@web';
-    public $css = [
+    public $css =
+        [
         'css/site.css',
-    ];
-    public $js = [
+        'css/login.css'
+        ];
+    public $js =
+        [
         'js/bootstrapModal.js',
-        'js/fullCalendar.js'
-    ];
+        'js/fullCalendar.js',
+        'js/login.js'
+        ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',

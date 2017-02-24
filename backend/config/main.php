@@ -21,6 +21,10 @@ return [
         'hello' => [
             'class' => 'backend\module\hello\Hello',
         ],
+        'gridview' => [
+            'class' => ['kartik/grid/Module']
+        ]
+
     ],
     'components' => [
         'request' => [

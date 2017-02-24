@@ -2,10 +2,11 @@
 
 namespace backend\controllers;
 
-use backend\models\Companies;
+use kartik\form\ActiveForm;
 use Yii;
 use backend\models\Branches;
 use backend\models\BranchesSearch;
+use yii\base\Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -57,6 +58,47 @@ class BranchesController extends Controller
         ]);
     }
 
+
+    /**
+     * Imports an excel file (.xlsx) using php,
+     *stores the excel data into selected database
+     */
+
+    public function actionImportExcel()
+    {
+        $inputFile = 'uploads/branches_file.xlsx';
+
+        try{
+            $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
+            $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+            $objPHPExcel = $objReader->load($inputFile);
+
+
+        }
+        catch(Exception $e){
+            var_dump($e);
+    }
+        $sheet = $objPHPExcel->getSheet(0);
+        $highestRow = $sheet->getHighestRow();
+        $highestColumn = $sheet->getHighestColumn();
+
+        for( $row = 1; $row<=$highestRow; $row++){
+            $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row);
+
+            if($row == 1){
+                continue;
+            }
+
+            $branch = new Branches();
+            $branch_id = $rowData[0][0];
+            $branch->companies_company_id;
+            $branch->branch_name;
+            $branch->branch_address;
+            $branch->branch_status;
+        }
+
+
+    }
     /**
      * Creates a new Branches model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -65,6 +107,12 @@ class BranchesController extends Controller
     public function actionCreate()
     {
         $model = new Branches();
+
+        if(Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())){
+
+            Yii::$app->response->format = 'json';
+            return ActiveForm::validate($model);
+        }
 
         if(Yii::$app->user->can('create-branch')){
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -83,7 +131,24 @@ class BranchesController extends Controller
 
     }
 
-    public function actionList($id){
+    /**
+     * ajax validation function that
+     * accepts ajax requests
+     * */
+
+    public function actionValidation()
+    {
+        $model = new Branches();
+
+        if(Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
+        {
+            Yii::$app->response->format = 'json';
+            return ActiveForm::validate($model);
+        }
+    }
+
+
+public function actionList($id){
 
         $getBranches = Branches::find()
                         ->where(['companies_company_id' => $id])
