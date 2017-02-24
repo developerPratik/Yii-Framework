@@ -68,6 +68,35 @@ class UploadedController extends Controller
         return false;
     }
 
+
+    public function actionSetCookie()
+    {
+
+        $cookie = new \yii\web\Cookie([
+            'name' => 'testCookie',
+            'value' => 'test Cookie Vaue']);
+
+        Yii::$app->getResponse()->getCookies()->add($cookie);
+    }
+
+
+    public function actionCheckCookie(){
+
+        if(Yii::$app->getRequest()->getCookies()->has('testCookie')){
+            echo Yii::$app->getRequest()->getCookies()->getValue('testCookie');
+
+        }
+        else{
+            echo 'no cookie set';
+
+        }
+
+
+
+
+
+
+    }
     /**
      * Creates a new Uploaded model.
      * If creation is successful, the browser will be redirected to the 'view' page.
