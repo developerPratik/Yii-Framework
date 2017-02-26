@@ -46,7 +46,7 @@ class Branches extends ActiveRecord
                     if( $('#branches-branch_address').val() === undefined)
                     {
                    false;
-                    }g
+                    }
 
                         else
                     {

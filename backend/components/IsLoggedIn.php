@@ -16,7 +16,7 @@ class IsLoggedIn extends Behavior{
 
 
    public function events(){return [
-          Application::EVENT_BEFORE_REQUEST=>'isLoggedIn'];
+          Application::EVENT_BEFORE_REQUEST=>'changeLanguage'];
    }
 
     public function isLoggedIn(){
@@ -31,5 +31,9 @@ class IsLoggedIn extends Behavior{
 
 
     }
-
+    public function changeLanguage(){
+        if(\Yii::$app->getRequest()->getCookies()->has('lang')){
+            \Yii::$app->language = \Yii::$app->getRequest()->getCookies()->getValue('lang');
+        }
+    }
 }

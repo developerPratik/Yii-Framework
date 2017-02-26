@@ -12,21 +12,35 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' =>
-    [
-        'settings' =>
-            [
-            'class' => 'backend\module\settings\Settings',
+        [
+            'settings' =>
+                [
+                    'class' => 'backend\module\settings\Settings',
+                ],
+
+            'hello' => [
+                'class' => 'backend\module\hello\Hello',
             ],
+            'gridview' => [
+                'class' => ['kartik/grid/Module']
+            ]
 
-        'hello' => [
-            'class' => 'backend\module\hello\Hello',
         ],
-        'gridview' => [
-            'class' => ['kartik/grid/Module']
-        ]
-
-    ],
-    'components' => [
+    'components' =>
+        [
+        'i18n' =>
+            [
+            'translations' => [
+                'app' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'app/error' => 'error.php,'
+                    ],
+                ],
+            ],
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
@@ -63,7 +77,6 @@ return [
             'class' => 'backend\components\MyComponent',
 
         ],
-
 
 
         'urlManager' => [

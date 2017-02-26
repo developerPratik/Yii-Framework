@@ -20,6 +20,7 @@ class AppAsset extends AssetBundle
         [
         'js/bootstrapModal.js',
         'js/fullCalendar.js',
+        'js/language.js',
         'js/login.js'
         ];
     public $depends = [

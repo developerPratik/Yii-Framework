@@ -4,7 +4,6 @@
 /* @var $content string */
 
 use backend\assets\AppAsset;
-use backend\assets\DashboardAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -12,7 +11,6 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 
 AppAsset::register($this);
-//DashboardAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -80,6 +78,7 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
+
 <!--    --><?php
 //    NavBar::begin([
 //        'brandLabel' => 'My Company',
@@ -139,6 +138,14 @@ AppAsset::register($this);
         ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>
+        <?php
+
+        if(isset($this->blocks['advertisement']) && isset($this->params['text'])){
+            echo $this->params['text'];
+            echo '<hr>';
+            echo $this->blocks['advertisement'];
+        }
+        ?>
     </div>
 </div>
 

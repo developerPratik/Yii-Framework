@@ -2,12 +2,21 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'My Yii Applicasdftion';
 ?>
 <div class="site-index">
 
+    <div class="languages">
+        <?php
+        foreach(Yii::$app->params['languages'] as $key => $value){
+            echo '<span class="language" id="'.$key.'">'.$value.' | </span>';
+        }
+        ?>
+    </div>
+
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1><?echo \Yii::t('app', 'Welcome');?></h1>
+        <h1>Congrats</h1>
 
         <p class="lead">You have successfully created your Yii-powered application.</p>
 
